@@ -1,0 +1,100 @@
+syntax ="proto3";
+
+option java_package ="com.cinemaoperations";
+option java_multiple_files =true;
+
+service CinemaOperationsService{
+  rpc GetAllSeat (SeatGetAllRequest) returns (SeatGetAllResponse){};
+  rpc UpdateSeatStatus  (SeatUpdateRequest) returns (SeatUpdateResponse){};
+
+  rpc GetAllMovieAmount (MovieAmountGetAllRequest) returns (MovieAmountGetAllResponse){};
+  rpc UpdateMovieAmount  (MovieAmountUpdateRequest) returns (MovieAmountUpdateResponse){};
+  rpc InsertMovieAmount (MovieAmountInsertRequest) returns (MovieAmountInsertResponse){};
+  rpc DeleteMovieAmount (MovieAmountDeleteRequest) returns (MovieAmountDeleteResponse){};
+
+  rpc GetAllCardInfo (CardInfoGetAllRequest) returns (CardInfoGetAllResponse){};
+
+  rpc GetAllSalesMovie (SalesMovieGetAllRequest) returns (SalesMovieGetAllResponse){};
+  rpc InsertSalesMovie (SalesMovieInsertRequest) returns (SalesMovieInsertResponse){};
+  rpc DeleteSalesMovie (SalesMovieDeleteRequest) returns (SalesMovieDeleteResponse){};
+  rpc CancelSalesMovie (SalesMovieCancelRequest) returns (SalesMovieCancelResponse){};
+  rpc CanceledGetAllSalesMovie (CanceledSalesMovieGetAllRequest) returns (CanceledSalesMovieGetAllResponse){};
+  rpc ChangedAllCanceledSalesMovie (ChangedAllCanceledSalesMovieGetAllRequest) returns (ChangedAllCanceledSalesMovieGetAllResponse){};
+  rpc deleteAllCanceledSalesMovie (DeleteAllCanceledSalesMovieRequest) returns (DeleteAllChangeledSalesMovieResponse){};
+}
+
+message Seat{
+  int64 id = 1;
+  bool seat_status = 2;
+}
+message  SeatGetAllRequest{};
+message  SeatGetAllResponse{repeated Seat seat = 1; };
+
+message  SeatUpdateRequest{
+  Seat seat = 1;
+int32 id = 2;};
+message  SeatUpdateResponse{bool isUpdated = 1;};
+
+
+message MovieAmount{
+  int64 id = 1;
+  string movie_name = 2;
+   int64 amount = 3;
+   string expire_date = 4;
+  int64 movie_time = 5;
+}
+message  MovieAmountGetAllRequest {};
+message  MovieAmountGetAllResponse {repeated MovieAmount movieAmount = 1; };
+
+message  MovieAmountUpdateRequest {
+  MovieAmount movieAmount = 1;
+  int32 id = 2;};
+message  MovieAmountUpdateResponse {bool isUpdated = 1;};
+
+message  MovieAmountInsertRequest {
+  MovieAmount movieAmount = 1;};
+message  MovieAmountInsertResponse {bool isSaved = 1;};
+
+message  MovieAmountDeleteRequest {int32 id = 1;};
+message  MovieAmountDeleteResponse {bool  isDelete = 1;};
+
+message SalesMovie{
+  int64 id = 1;
+  string movie_name = 2;
+  string customer_name = 3;
+  int64 seat_count = 4;
+  int64 total_price = 5;
+  bool is_canceled =6;
+  string sale_date =7;
+}
+message  SalesMovieGetAllRequest {};
+message  SalesMovieGetAllResponse {repeated SalesMovie salesMovie = 1; };
+
+message  SalesMovieInsertRequest { SalesMovie salesMovie = 1;};
+message  SalesMovieInsertResponse {bool isSaved = 1;};
+
+message  SalesMovieDeleteRequest {int32 id = 1;};
+message  SalesMovieDeleteResponse {bool  isDelete = 1;};
+
+message  SalesMovieCancelRequest {int32 id = 1;};
+message SalesMovieCancelResponse {bool  isCanceled = 1;};
+
+message  CanceledSalesMovieGetAllRequest {};
+message  CanceledSalesMovieGetAllResponse {repeated SalesMovie salesMovie = 1; };
+
+message  ChangedAllCanceledSalesMovieGetAllRequest {};
+message  ChangedAllCanceledSalesMovieGetAllResponse {bool  isCanceled = 1; };
+
+message  DeleteAllCanceledSalesMovieRequest {};
+message  DeleteAllChangeledSalesMovieResponse {bool  isDeletedAllChanged = 1; };
+
+message CardInfo{
+  int64 id = 1;
+  string card_owner_name = 2;
+   int64 card_number = 3;
+  int64 expiration = 4;
+  int64 cvv= 5;
+}
+message  CardInfoGetAllRequest {};
+message  CardInfoGetAllResponse {repeated CardInfo cardInfo = 1; };
+
